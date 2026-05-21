@@ -10,98 +10,98 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #888;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #5e6469;
+    display: flex; align-items: center; justify-content: center;
     min-height: 100vh;
     font-family: 'Cormorant Garamond', serif;
   }
 
-  /* DIN A6 */
+  /* ── KARTE ── */
   .card {
-    width: 396px;
-    height: 559px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    width: 396px; height: 559px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
   }
-
-  /* Grauer Hintergrund wie im Referenzbild */
   .bg {
     position: absolute; inset: 0;
     background: linear-gradient(160deg, #b8bec4 0%, #9ea6ad 40%, #8e9499 70%, #848c91 100%);
   }
-
-  /* Tannenwald-Silhouette hinten, sehr dezent */
-  .forest {
-    position: absolute;
-    bottom: 46px; left: 0;
-    width: 100%; height: 220px;
-    opacity: 0.11;
-    pointer-events: none;
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none; z-index: 1;
   }
 
-  /* Schneeflocken (statische dekorative Flocken wie im Bild) */
-  .flakes-static {
-    position: absolute; inset: 0;
-    pointer-events: none;
+  /* Tannenwald */
+  .forest {
+    position: absolute; bottom: 46px; left: 0;
+    width: 100%; height: 190px;
+    opacity: 0.09; pointer-events: none; z-index: 2;
+  }
+
+  /* Statische Schneeflocken */
+  .flakes-layer { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
+  .flake-item {
+    position: absolute;
+    color: rgba(225,230,232,1);
+    font-style: normal;
+    line-height: 1;
+    user-select: none;
+    filter: grayscale(1) brightness(1.8);
   }
 
   /* Fallende Schneeflocken */
-  .snowflakes { position: absolute; inset: 0; pointer-events: none; }
+  .snowflakes { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
   .flake {
-    position: absolute; top: -20px; color: rgba(255,255,255,0.7);
-    font-size: var(--size, 12px);
-    animation: fall var(--fall-dur,8s) linear infinite var(--fall-delay,0s);
+    position: absolute; top: -20px; color: rgba(255,255,255,0.6);
+    font-size: var(--size,10px);
+    animation: fall var(--fall-dur,9s) linear infinite var(--fall-delay,0s);
     user-select: none;
   }
   @keyframes fall {
     0%  { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
-    8%  { opacity: 0.8; }
-    92% { opacity: 0.5; }
-    100%{ transform: translateY(580px) translateX(var(--drift,15px)) rotate(300deg); opacity: 0; }
+    8%  { opacity: 0.7; }
+    92% { opacity: 0.4; }
+    100%{ transform: translateY(580px) translateX(var(--drift,12px)) rotate(280deg); opacity: 0; }
   }
+
+  /* ── ORNAMENTE ── */
+  .ornament { display: flex; align-items: center; gap: 10px; width: 100%; }
+  .orn-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4)); }
+  .orn-line.r { background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent); }
+  .orn-diamond { width: 5px; height: 5px; background: rgba(255,255,255,0.55); transform: rotate(45deg); flex-shrink: 0; }
+  .orn-diamond.sm { width: 3px; height: 3px; opacity: 0.45; }
+  .divider { display: flex; align-items: center; gap: 8px; }
+  .div-line { flex: 1; height: 1px; background: rgba(255,255,255,0.28); }
+  .div-icon { width: 7px; height: 7px; border: 1px solid rgba(255,255,255,0.45); transform: rotate(45deg); flex-shrink: 0; }
 
   /* ── NAVIGATION ── */
   .nav {
     position: absolute; bottom: 0; left: 0; right: 0; height: 46px;
-    background: rgba(90,96,100,0.75);
-    backdrop-filter: blur(12px);
+    background: rgba(80,86,90,0.82); backdrop-filter: blur(12px);
     display: flex; align-items: center; justify-content: space-around;
-    z-index: 30;
-    border-top: 1px solid rgba(255,255,255,0.15);
+    z-index: 30; border-top: 1px solid rgba(255,255,255,0.12);
   }
   .nav-btn {
     display: flex; flex-direction: column; align-items: center; gap: 3px;
-    cursor: pointer; padding: 5px 8px; border: none; background: none;
-    -webkit-tap-highlight-color: transparent;
+    cursor: pointer; padding: 5px 7px; border: none; background: none;
+    -webkit-tap-highlight-color: transparent; position: relative;
     transition: opacity 0.2s;
-    position: relative;
   }
-  .nav-btn:hover { opacity: 0.8; }
-
-  /* Minimalistisches SVG-Icon */
+  .nav-btn:hover { opacity: 0.75; }
   .nav-icon {
-    width: 16px; height: 16px;
-    stroke: rgba(255,255,255,0.38);
-    fill: none;
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: stroke 0.2s;
-    flex-shrink: 0;
+    width: 16px; height: 16px; stroke: rgba(255,255,255,0.35); fill: none;
+    stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s;
   }
-  .nav-btn.active .nav-icon { stroke: rgba(255,255,255,0.92); }
+  .nav-btn.active .nav-icon { stroke: rgba(255,255,255,0.9); }
   .nav-label {
-    font-family: 'Cinzel', serif; font-size: 5.5px; letter-spacing: 1.2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.35); transition: color 0.2s;
-    white-space: nowrap;
+    font-family: 'Cinzel', serif; font-size: 5.5px; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,0.3); transition: color 0.2s; white-space: nowrap;
   }
-  .nav-btn.active .nav-label { color: rgba(255,255,255,0.88); }
+  .nav-btn.active .nav-label { color: rgba(255,255,255,0.85); }
   .nav-btn.active::after {
     content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 16px; height: 1.5px; background: rgba(255,255,255,0.7); border-radius: 1px;
+    width: 16px; height: 1.5px; background: rgba(255,255,255,0.6); border-radius: 1px;
   }
 
   /* ── SEITEN ── */
@@ -109,375 +109,332 @@
   .page {
     position: absolute; inset: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 28px 36px 14px; text-align: center; color: #fff;
+    padding: 30px 40px 16px; text-align: center; color: #fff;
     opacity: 0; pointer-events: none; transform: translateY(6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.38s ease, transform 0.38s ease;
   }
   .page.active { opacity: 1; pointer-events: all; transform: translateY(0); }
 
-  /* ── Gemeinsame Typografie ── */
+  /* ── GEMEINSAME TYPO ── */
+  .eyebrow {
+    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.62);
+    margin: 12px 0 10px;
+  }
+  .names {
+    font-family: 'Great Vibes', cursive; font-size: 68px; line-height: 1;
+    color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  }
+  .amp { font-size: 54px; color: rgba(255,255,255,0.8); margin: 0 4px; }
+
+  /* Detail-Zeilen wie in der Vorlage */
+  .details-block {
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.13);
+    border-bottom: 1px solid rgba(255,255,255,0.13);
+    padding: 10px 0; margin-top: 14px;
+  }
+  .d-row { display: flex; align-items: baseline; gap: 10px; padding: 4px 0; }
+  .d-row + .d-row { border-top: 1px solid rgba(255,255,255,0.07); }
+  .d-label {
+    font-family: 'Cinzel', serif; font-size: 6.5px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.38);
+    min-width: 52px; flex-shrink: 0; text-align: right;
+  }
+  .d-sep { width: 1px; height: 11px; background: rgba(255,255,255,0.18); flex-shrink: 0; }
+  .d-val {
+    font-family: 'Cormorant Garamond', serif; font-size: 13px;
+    color: rgba(255,255,255,0.82); line-height: 1.3; text-align: left;
+  }
+  .d-val em { font-style: italic; font-size: 11px; color: rgba(255,255,255,0.4); display: block; }
+
+  /* RSVP */
+  .rsvp-block { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .rsvp-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; color: rgba(255,255,255,0.42); }
+  .rsvp-date { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.72); }
+
+  /* Kleine Seiten-Eyebrows */
   .page-eyebrow {
-    font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px;
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.55); margin: 10px 0 8px;
   }
-  .thin-rule {
-    width: 60px; height: 1px; background: rgba(255,255,255,0.35); margin: 0 auto 18px;
+  .small-names {
+    font-family: 'Great Vibes', cursive; font-size: 38px; line-height: 1;
+    color: rgba(255,255,255,0.72);
   }
-  .script-names {
-    font-family: 'Great Vibes', cursive; font-size: 62px; line-height: 1;
-    color: #fff; letter-spacing: 1px;
-    text-shadow: 0 1px 12px rgba(0,0,0,0.12);
-  }
-  .script-amp {
-    font-family: 'Great Vibes', cursive; font-size: 52px;
-    color: rgba(255,255,255,0.85); margin: 0 4px;
-  }
-  .date-display {
-    font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 4px;
-    color: rgba(255,255,255,0.9); margin-top: 18px;
-  }
-  .sub-text {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; letter-spacing: 0.5px;
-  }
+  .small-amp { font-size: 30px; color: rgba(255,255,255,0.55); margin: 0 4px; }
 
-  /* Seite 2: Programm */
-  .prog-list { width: 100%; margin-top: 4px; }
-  .prog-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left;
-  }
-  .prog-item:last-child { border-bottom: none; }
-  .prog-time {
-    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 1px;
-    color: rgba(255,255,255,0.5); min-width: 38px; padding-top: 2px; flex-shrink: 0;
-  }
-  .prog-dash { width: 12px; height: 1px; background: rgba(255,255,255,0.3); margin-top: 8px; flex-shrink: 0; }
-  .prog-title {
-    font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.2;
-  }
-  .prog-sub {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: rgba(255,255,255,0.4);
-  }
-
-  /* Seite 3: Location */
-  .loc-block { width: 100%; margin-top: 4px; }
-  .loc-item { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
-  .loc-item:last-child { border-bottom: none; }
-  .loc-tag {
-    font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;
-  }
-  .loc-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: rgba(255,255,255,0.9); }
-  .loc-addr {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 1px;
-  }
-
-  /* Seite 4: Dresscode */
+  /* Dresscode */
   .dress-title {
-    font-family: 'Great Vibes', cursive; font-size: 48px; color: #fff;
-    text-shadow: 0 1px 12px rgba(0,0,0,0.1); margin: 6px 0 14px;
+    font-family: 'Great Vibes', cursive; font-size: 46px; color: #fff;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.1); margin: 6px 0 12px;
   }
   .dress-desc {
     font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7;
   }
-  .swatches { display: flex; gap: 9px; justify-content: center; margin-top: 18px; }
+  .swatches { display: flex; gap: 9px; justify-content: center; margin-top: 16px; }
   .swatch {
     width: 24px; height: 24px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.25); box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
   .dress-note {
-    font-family: 'Cinzel', serif; font-size: 7.5px; letter-spacing: 2.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 14px;
+    font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-top: 13px;
   }
 
-  /* Seite 5: RSVP */
-  .rsvp-wrap { width: 100%; margin-top: 4px; display: flex; flex-direction: column; gap: 14px; }
-  .rsvp-until {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7;
-  }
-  .rsvp-until strong {
-    font-style: normal; font-size: 17px; color: rgba(255,255,255,0.85); display: block;
-  }
-  .rsvp-box {
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 3px; padding: 12px 16px; text-align: left;
-  }
-  .rsvp-box-label {
-    font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 5px;
-  }
-  .rsvp-box-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: rgba(255,255,255,0.88); }
-  .rsvp-box-detail {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: rgba(255,255,255,0.38); margin-top: 2px;
-  }
-  .rsvp-hint {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: rgba(255,255,255,0.3); text-align: center;
-  }
-
-  /* Seite 6: FAQ */
-  .faq-list { width: 100%; margin-top: 2px; }
-  .faq-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
-  .faq-item:last-child { border-bottom: none; }
+  /* FAQ Accordion */
+  .faq-list { width: 100%; border-top: 1px solid rgba(255,255,255,0.13); margin-top: 10px; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
   .faq-q {
-    font-family: 'Cinzel', serif; font-size: 7.5px; letter-spacing: 1.8px;
-    text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 3px;
+    font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.52);
+    padding: 9px 0; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none; -webkit-tap-highlight-color: transparent; transition: color 0.2s;
   }
+  .faq-q:hover, .faq-q.open { color: rgba(255,255,255,0.82); }
+  .faq-arrow {
+    width: 8px; height: 8px; flex-shrink: 0; margin-left: 8px;
+    stroke: rgba(255,255,255,0.4); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.3s ease;
+  }
+  .faq-q.open .faq-arrow { transform: rotate(180deg); }
   .faq-a {
     font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12.5px; color: rgba(255,255,255,0.55); line-height: 1.45;
+    font-size: 12.5px; color: rgba(255,255,255,0.58); line-height: 1.5;
+    max-height: 0; overflow: hidden; padding-bottom: 0;
+    transition: max-height 0.35s ease, padding-bottom 0.3s ease;
+  }
+  .faq-a.open { max-height: 100px; padding-bottom: 9px; }
+
+  /* Ringe */
+  .rings-svg { position: absolute; bottom: 56px; left: 22px; opacity: 0.18; z-index: 11; }
+
+
+  /* RSVP Mail-Button */
+  .rsvp-mail-btn {
+    margin-top: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.82);
+    font-family: 'Cinzel', serif; font-size: 8.5px; letter-spacing: 3px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 2px; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .rsvp-mail-btn:hover {
+    background: rgba(255,255,255,0.13);
+    border-color: rgba(255,255,255,0.55);
+  }
+  .rsvp-mail-btn svg {
+    width: 13px; height: 13px; stroke: rgba(255,255,255,0.7);
+    fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .rsvp-mail-note {
+    margin-top: 9px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 11px; color: rgba(255,255,255,0.3); text-align: center;
+  }
+  /* Musik-Button */
+  .music-btn {
+    position: absolute; top: 18px; right: 20px; z-index: 25;
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none; background: none; padding: 0;
+    -webkit-tap-highlight-color: transparent; opacity: 0.35; transition: opacity 0.25s;
+  }
+  .music-btn:hover { opacity: 0.62; }
+  .music-btn svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  @keyframes musicPulse { 0%,100%{opacity:0.4} 50%{opacity:0.72} }
+  .music-btn.playing { animation: musicPulse 2.5s ease-in-out infinite; }
+  #spotify-frame { display: none; }
+
+  .mail-btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    width: 100%; margin-top: 16px; padding: 11px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 2px; cursor: pointer;
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mail-btn:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.95); }
+  .mail-btn svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.65); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .mail-btn:hover svg { stroke: rgba(255,255,255,0.92); }
+  .mail-hint { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 10.5px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 8px; line-height: 1.5; }
+
+  /* RSVP Mail-Button */
+  .rsvp-btn {
+    display: inline-block; margin-top: 18px;
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 3.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.82);
+    border: 1px solid rgba(255,255,255,0.35); padding: 9px 20px;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+    background: rgba(255,255,255,0.06);
+  }
+  .rsvp-btn:hover {
+    background: rgba(255,255,255,0.16); color: #fff; border-color: rgba(255,255,255,0.6);
   }
 </style>
 </head>
 <body>
 <div class="card">
   <div class="bg"></div>
+  <div class="vignette"></div>
 
-  <!-- Tannenwald dezent im Hintergrund -->
-  <svg class="forest" viewBox="0 0 396 220" xmlns="http://www.w3.org/2000/svg">
-    <!--
-      Jeder Baum besteht aus einem schlanken Stamm und 3 Etagen,
-      die von unten nach oben breiter/kürzer werden.
-      Etagen sind einfache symmetrische Dreiecke.
-    -->
-
-    <!-- Baum 1 – ganz links, hinten, schmal -->
-    <g transform="translate(28,220)">
-      <rect x="-3" y="-18" width="6" height="18" fill="white"/>
-      <polygon points="0,-170  -22,-95  22,-95" fill="white"/>
-      <polygon points="0,-130  -28,-65  28,-65" fill="white"/>
-      <polygon points="0,-88   -34,-18  34,-18" fill="white"/>
-    </g>
-
-    <!-- Baum 2 – links, etwas vorne, höher -->
-    <g transform="translate(82,220)">
-      <rect x="-4" y="-22" width="8" height="22" fill="white"/>
-      <polygon points="0,-190  -26,-105  26,-105" fill="white"/>
-      <polygon points="0,-148  -34,-75   34,-75"  fill="white"/>
-      <polygon points="0,-102  -42,-22   42,-22"  fill="white"/>
-    </g>
-
-    <!-- Baum 3 – links-mitte, hinten, klein -->
-    <g transform="translate(148,220)">
-      <rect x="-3" y="-16" width="6" height="16" fill="white"/>
-      <polygon points="0,-155  -20,-88  20,-88" fill="white"/>
-      <polygon points="0,-118  -26,-58  26,-58" fill="white"/>
-      <polygon points="0,-78   -32,-16  32,-16" fill="white"/>
-    </g>
-
-    <!-- Baum 4 – mitte, vorne, groß -->
-    <g transform="translate(198,220)">
-      <rect x="-5" y="-24" width="10" height="24" fill="white"/>
-      <polygon points="0,-205  -28,-112  28,-112" fill="white"/>
-      <polygon points="0,-160  -38,-82   38,-82"  fill="white"/>
-      <polygon points="0,-110  -48,-24   48,-24"  fill="white"/>
-    </g>
-
-    <!-- Baum 5 – rechts-mitte, hinten, klein -->
-    <g transform="translate(252,220)">
-      <rect x="-3" y="-16" width="6" height="16" fill="white"/>
-      <polygon points="0,-150  -19,-85  19,-85" fill="white"/>
-      <polygon points="0,-112  -25,-56  25,-56" fill="white"/>
-      <polygon points="0,-74   -31,-16  31,-16" fill="white"/>
-    </g>
-
-    <!-- Baum 6 – rechts, vorne -->
-    <g transform="translate(312,220)">
-      <rect x="-4" y="-20" width="8" height="20" fill="white"/>
-      <polygon points="0,-185  -25,-100  25,-100" fill="white"/>
-      <polygon points="0,-142  -32,-70   32,-70"  fill="white"/>
-      <polygon points="0,-96   -40,-20   40,-20"  fill="white"/>
-    </g>
-
-    <!-- Baum 7 – ganz rechts, hinten, schmal -->
-    <g transform="translate(372,220)">
-      <rect x="-3" y="-18" width="6" height="18" fill="white"/>
-      <polygon points="0,-168  -21,-94  21,-94" fill="white"/>
-      <polygon points="0,-128  -27,-64  27,-64" fill="white"/>
-      <polygon points="0,-86   -33,-18  33,-18" fill="white"/>
-    </g>
+  <!-- Tannenwald -->
+  <svg class="forest" viewBox="0 0 396 190" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(28,190)"><rect x="-3" y="-18" width="6" height="18" fill="white"/><polygon points="0,-155 -19,-85 19,-85" fill="white"/><polygon points="0,-115 -25,-57 25,-57" fill="white"/><polygon points="0,-75 -31,-17 31,-17" fill="white"/></g>
+    <g transform="translate(82,190)"><rect x="-4" y="-20" width="8" height="20" fill="white"/><polygon points="0,-172 -23,-95 23,-95" fill="white"/><polygon points="0,-130 -31,-67 31,-67" fill="white"/><polygon points="0,-88 -39,-20 39,-20" fill="white"/></g>
+    <g transform="translate(148,190)"><rect x="-3" y="-15" width="6" height="15" fill="white"/><polygon points="0,-140 -17,-78 17,-78" fill="white"/><polygon points="0,-104 -23,-50 23,-50" fill="white"/><polygon points="0,-67 -29,-15 29,-15" fill="white"/></g>
+    <g transform="translate(198,190)"><rect x="-5" y="-23" width="10" height="23" fill="white"/><polygon points="0,-188 -25,-103 25,-103" fill="white"/><polygon points="0,-144 -34,-73 34,-73" fill="white"/><polygon points="0,-96 -44,-23 44,-23" fill="white"/></g>
+    <g transform="translate(252,190)"><rect x="-3" y="-15" width="6" height="15" fill="white"/><polygon points="0,-136 -16,-76 16,-76" fill="white"/><polygon points="0,-100 -22,-48 22,-48" fill="white"/><polygon points="0,-65 -28,-15 28,-15" fill="white"/></g>
+    <g transform="translate(312,190)"><rect x="-4" y="-19" width="8" height="19" fill="white"/><polygon points="0,-168 -22,-91 22,-91" fill="white"/><polygon points="0,-126 -29,-62 29,-62" fill="white"/><polygon points="0,-84 -37,-19 37,-19" fill="white"/></g>
+    <g transform="translate(372,190)"><rect x="-3" y="-17" width="6" height="17" fill="white"/><polygon points="0,-150 -18,-84 18,-84" fill="white"/><polygon points="0,-113 -24,-55 24,-55" fill="white"/><polygon points="0,-75 -30,-17 30,-17" fill="white"/></g>
   </svg>
 
-  <!-- Dekorative statische Schneeflocken wie im Referenzbild -->
-  <svg class="flakes-static" viewBox="0 0 396 513" xmlns="http://www.w3.org/2000/svg">
-    <!-- Große Flocke oben links -->
-    <g transform="translate(48,52) rotate(15)" opacity="0.55" stroke="white" stroke-width="1.2" fill="none">
-      <line x1="0" y1="-22" x2="0" y2="22"/>
-      <line x1="-22" y1="0" x2="22" y2="0"/>
-      <line x1="-15.5" y1="-15.5" x2="15.5" y2="15.5"/>
-      <line x1="15.5" y1="-15.5" x2="-15.5" y2="15.5"/>
-      <line x1="0" y1="-22" x2="-5" y2="-17"/><line x1="0" y1="-22" x2="5" y2="-17"/>
-      <line x1="0" y1="22" x2="-5" y2="17"/><line x1="0" y1="22" x2="5" y2="17"/>
-      <line x1="-22" y1="0" x2="-17" y2="-5"/><line x1="-22" y1="0" x2="-17" y2="5"/>
-      <line x1="22" y1="0" x2="17" y2="-5"/><line x1="22" y1="0" x2="17" y2="5"/>
-      <circle cx="0" cy="0" r="2.5" fill="white" stroke="none"/>
-      <circle cx="0" cy="-12" r="1.5" fill="white" stroke="none"/>
-      <circle cx="0" cy="12" r="1.5" fill="white" stroke="none"/>
-      <circle cx="-12" cy="0" r="1.5" fill="white" stroke="none"/>
-      <circle cx="12" cy="0" r="1.5" fill="white" stroke="none"/>
-    </g>
-    <!-- Mittlere Flocke links -->
-    <g transform="translate(80,190) rotate(-10)" opacity="0.4" stroke="white" stroke-width="1" fill="none">
-      <line x1="0" y1="-16" x2="0" y2="16"/>
-      <line x1="-16" y1="0" x2="16" y2="0"/>
-      <line x1="-11" y1="-11" x2="11" y2="11"/>
-      <line x1="11" y1="-11" x2="-11" y2="11"/>
-      <circle cx="0" cy="0" r="2" fill="white" stroke="none"/>
-      <circle cx="0" cy="-9" r="1.2" fill="white" stroke="none"/>
-      <circle cx="0" cy="9" r="1.2" fill="white" stroke="none"/>
-      <circle cx="-9" cy="0" r="1.2" fill="white" stroke="none"/>
-      <circle cx="9" cy="0" r="1.2" fill="white" stroke="none"/>
-    </g>
-    <!-- Flocke oben Mitte -->
-    <g transform="translate(230,95) rotate(5)" opacity="0.38" stroke="white" stroke-width="1" fill="none">
-      <line x1="0" y1="-14" x2="0" y2="14"/>
-      <line x1="-14" y1="0" x2="14" y2="0"/>
-      <line x1="-10" y1="-10" x2="10" y2="10"/>
-      <line x1="10" y1="-10" x2="-10" y2="10"/>
-      <circle cx="0" cy="0" r="1.8" fill="white" stroke="none"/>
-    </g>
-    <!-- Flocke oben rechts -->
-    <g transform="translate(348,42) rotate(-20)" opacity="0.45" stroke="white" stroke-width="1.1" fill="none">
-      <line x1="0" y1="-18" x2="0" y2="18"/>
-      <line x1="-18" y1="0" x2="18" y2="0"/>
-      <line x1="-12.5" y1="-12.5" x2="12.5" y2="12.5"/>
-      <line x1="12.5" y1="-12.5" x2="-12.5" y2="12.5"/>
-      <line x1="0" y1="-18" x2="-4" y2="-14"/><line x1="0" y1="-18" x2="4" y2="-14"/>
-      <line x1="0" y1="18" x2="-4" y2="14"/><line x1="0" y1="18" x2="4" y2="14"/>
-      <circle cx="0" cy="0" r="2" fill="white" stroke="none"/>
-    </g>
-    <!-- Kleine Punkte / Flocken verstreut -->
-    <circle cx="160" cy="58" r="2.5" fill="white" opacity="0.35"/>
-    <circle cx="290" cy="130" r="2" fill="white" opacity="0.3"/>
-    <circle cx="58" cy="300" r="2" fill="white" opacity="0.25"/>
-    <circle cx="340" cy="260" r="2.5" fill="white" opacity="0.28"/>
-    <circle cx="100" cy="420" r="2" fill="white" opacity="0.3"/>
-    <circle cx="360" cy="380" r="2" fill="white" opacity="0.25"/>
-    <circle cx="200" cy="160" r="1.8" fill="white" opacity="0.3"/>
-    <circle cx="310" cy="72" r="1.5" fill="white" opacity="0.3"/>
-    <!-- Große Flocke unten links -->
-    <g transform="translate(82,415) rotate(8)" opacity="0.5" stroke="white" stroke-width="1.3" fill="none">
-      <line x1="0" y1="-26" x2="0" y2="26"/>
-      <line x1="-26" y1="0" x2="26" y2="0"/>
-      <line x1="-18.5" y1="-18.5" x2="18.5" y2="18.5"/>
-      <line x1="18.5" y1="-18.5" x2="-18.5" y2="18.5"/>
-      <line x1="0" y1="-26" x2="-6" y2="-20"/><line x1="0" y1="-26" x2="6" y2="-20"/>
-      <line x1="0" y1="26" x2="-6" y2="20"/><line x1="0" y1="26" x2="6" y2="20"/>
-      <line x1="-26" y1="0" x2="-20" y2="-6"/><line x1="-26" y1="0" x2="-20" y2="6"/>
-      <line x1="26" y1="0" x2="20" y2="-6"/><line x1="26" y1="0" x2="20" y2="6"/>
-      <circle cx="0" cy="0" r="3" fill="white" stroke="none"/>
-      <circle cx="0" cy="-14" r="1.8" fill="white" stroke="none"/>
-      <circle cx="0" cy="14" r="1.8" fill="white" stroke="none"/>
-      <circle cx="-14" cy="0" r="1.8" fill="white" stroke="none"/>
-      <circle cx="14" cy="0" r="1.8" fill="white" stroke="none"/>
-    </g>
-    <!-- Flocke unten Mitte -->
-    <g transform="translate(240,435) rotate(-5)" opacity="0.42" stroke="white" stroke-width="1.1" fill="none">
-      <line x1="0" y1="-18" x2="0" y2="18"/>
-      <line x1="-18" y1="0" x2="18" y2="0"/>
-      <line x1="-12.5" y1="-12.5" x2="12.5" y2="12.5"/>
-      <line x1="12.5" y1="-12.5" x2="-12.5" y2="12.5"/>
-      <circle cx="0" cy="0" r="2" fill="white" stroke="none"/>
-      <circle cx="0" cy="-10" r="1.3" fill="white" stroke="none"/>
-      <circle cx="0" cy="10" r="1.3" fill="white" stroke="none"/>
-      <circle cx="-10" cy="0" r="1.3" fill="white" stroke="none"/>
-      <circle cx="10" cy="0" r="1.3" fill="white" stroke="none"/>
-    </g>
-    <!-- Flocke rechts unten -->
-    <g transform="translate(368,460) rotate(12)" opacity="0.38" stroke="white" stroke-width="1" fill="none">
-      <line x1="0" y1="-14" x2="0" y2="14"/>
-      <line x1="-14" y1="0" x2="14" y2="0"/>
-      <line x1="-10" y1="-10" x2="10" y2="10"/>
-      <line x1="10" y1="-10" x2="-10" y2="10"/>
-      <circle cx="0" cy="0" r="1.8" fill="white" stroke="none"/>
-    </g>
-    <!-- Kleine Flocken rechte Seite -->
-    <g transform="translate(378,200) rotate(0)" opacity="0.3" stroke="white" stroke-width="0.9" fill="none">
-      <line x1="0" y1="-10" x2="0" y2="10"/>
-      <line x1="-10" y1="0" x2="10" y2="0"/>
-      <line x1="-7" y1="-7" x2="7" y2="7"/>
-      <line x1="7" y1="-7" x2="-7" y2="7"/>
-    </g>
-  </svg>
+  <!-- Schneeflocken als Unicode ❄ -->
+  <div class="flakes-layer">
+    <span class="flake-item" style="top:28px;  left:18px;  font-size:28px; opacity:0.22; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:18px;  right:22px; font-size:22px; opacity:0.18; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:72px;  left:8px;   font-size:14px; opacity:0.15; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:55px;  right:55px; font-size:12px; opacity:0.13; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:10px;  left:50%;   font-size:10px; opacity:0.12; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="bottom:100px; left:20px;  font-size:32px; opacity:0.2;  color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="bottom:115px; right:18px; font-size:18px; opacity:0.16; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="bottom:90px;  left:45%;   font-size:14px; opacity:0.13; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:180px; right:12px; font-size:16px; opacity:0.13; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:220px; left:10px;  font-size:11px; opacity:0.11; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:310px; right:20px; font-size:10px; opacity:0.11; color:rgba(230,234,236,0.9);">❄</span>
+    <span class="flake-item" style="top:350px; left:18px;  font-size:13px; opacity:0.13; color:rgba(230,234,236,0.9);">❄</span>
+  </div>
 
   <!-- Fallende Schneeflocken -->
   <div class="snowflakes" id="flakes"></div>
 
+  <!-- Eheringe unten links (nur auf Startseite sichtbar, immer da) -->
+  <svg class="rings-svg" width="40" height="21" viewBox="0 0 40 21">
+    <circle cx="13" cy="10.5" r="8.5" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="27" cy="10.5" r="8.5" fill="none" stroke="white" stroke-width="1.5"/>
+  </svg>
+
+  <!-- Musik-Button -->
+  <iframe id="spotify-frame" src="" width="0" height="0" frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+  <button class="music-btn" id="music-btn" title="Musik abspielen">
+    <svg id="icon-off" viewBox="0 0 16 16"><path d="M3 5.5H1v5h2l4 3v-11L3 5.5z"/><line x1="12" y1="5.5" x2="15" y2="10.5"/><line x1="15" y1="5.5" x2="12" y2="10.5"/></svg>
+    <svg id="icon-on" style="display:none" viewBox="0 0 16 16"><path d="M3 5.5H1v5h2l4 3v-11L3 5.5z"/><path d="M10.5 5 C12 6 12 10 10.5 11"/><path d="M12.5 3.5 C15 5.5 15 10.5 12.5 12.5"/></svg>
+  </button>
+
   <!-- ══ SEITEN ══ -->
   <div class="pages">
 
-    <!-- 1. Start / Save the Date -->
+    <!-- 1. Start -->
     <div class="page active" id="page-home">
-      <div class="page-eyebrow">Einladung</div>
-      <div class="thin-rule"></div>
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:10px">Wir heiraten</div>
-      <div class="script-names">Saskia <span class="script-amp">&</span> Tim</div>
-      <div class="date-display">28.11.2026</div>
-      <div class="sub-text">Offizielle Einladung folgt</div>
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
+      <div class="eyebrow">Wir heiraten</div>
+      <div class="names">Saskia <span class="amp">&</span> Tim</div>
+      <div class="divider" style="width:150px;margin:14px auto 10px">
+        <div class="div-line"></div><div class="div-icon"></div><div class="div-line"></div>
+      </div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;letter-spacing:5px;color:rgba(255,255,255,0.92)">28 · 11 · 2026</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px;letter-spacing:1px">Samstag</div>
+      <div class="ornament" style="margin-top:14px">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11.5px;color:rgba(255,255,255,0.35);margin-top:12px;letter-spacing:0.5px">Ihr seid herzlich eingeladen</div>
     </div>
 
     <!-- 2. Programm -->
-    <div class="page" id="page-program">
+    <div class="page" id="page-program" style="justify-content:flex-start;padding-top:28px">
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
       <div class="page-eyebrow">Unser Tag</div>
-      <div class="thin-rule"></div>
-      <div class="prog-list">
-        <div class="prog-item">
-          <div class="prog-time">17:00</div>
-          <div class="prog-dash"></div>
-          <div>
-            <div class="prog-title">Standesamtliche Trauung</div>
-            <div class="prog-sub">Minoritenkloster Ratingen</div>
-          </div>
+      <div class="small-names">Saskia <span class="small-amp">&</span> Tim</div>
+      <div class="divider" style="width:120px;margin:8px auto 0">
+        <div class="div-line"></div><div class="div-icon"></div><div class="div-line"></div>
+      </div>
+      <div class="details-block">
+        <div class="d-row">
+          <div class="d-label">16:30</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Einlass <em>Minoritenkloster Ratingen</em></div>
         </div>
-        <div class="prog-item">
-          <div class="prog-time">abends</div>
-          <div class="prog-dash"></div>
-          <div>
-            <div class="prog-title">Hochzeitsdinner</div>
-            <div class="prog-sub">Rheinliebe am Deich</div>
-          </div>
+        <div class="d-row">
+          <div class="d-label">17:00</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Standesamtliche Trauung <em>Minoritenkloster Ratingen</em></div>
         </div>
-        <div class="prog-item">
-          <div class="prog-time">später</div>
-          <div class="prog-dash"></div>
-          <div>
-            <div class="prog-title">After-Wedding Party</div>
-            <div class="prog-sub">Rheinliebe am Deich</div>
-          </div>
+        <div class="d-row">
+          <div class="d-label">Abends</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Sektempfang &amp; Dinner <em>Rheinliebe am Deich</em></div>
         </div>
+        <div class="d-row">
+          <div class="d-label">Später</div>
+          <div class="d-sep"></div>
+          <div class="d-val">After-Wedding Party <em>Rheinliebe am Deich</em></div>
+        </div>
+      </div>
+      <div class="rsvp-block">
+        <div class="rsvp-text">Bitte meldet euch bis zum</div>
+        <div class="rsvp-date">31. August 2026</div>
       </div>
     </div>
 
     <!-- 3. Location -->
-    <div class="page" id="page-location">
+    <div class="page" id="page-location" style="justify-content:flex-start;padding-top:28px">
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
       <div class="page-eyebrow">Locations</div>
-      <div class="thin-rule"></div>
-      <div class="loc-block">
-        <div class="loc-item">
-          <div class="loc-tag">Trauung</div>
-          <div class="loc-name">Minoritenkloster Ratingen</div>
-          <div class="loc-addr">Minoritenstr. 1, 40878 Ratingen</div>
+      <div class="details-block" style="margin-top:4px">
+        <div class="d-row">
+          <div class="d-label">Trauung</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Minoritenkloster Ratingen <em>Minoritenstr. 1, 40878 Ratingen</em></div>
         </div>
-        <div class="loc-item">
-          <div class="loc-tag">Dinner &amp; Party</div>
-          <div class="loc-name">Rheinliebe am Deich</div>
-          <div class="loc-addr">Am Deich, Düsseldorf</div>
+        <div class="d-row">
+          <div class="d-label">Dinner</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Rheinliebe am Deich <em>Niederkasseler Deich 301, Düsseldorf</em></div>
+        </div>
+        <div class="d-row">
+          <div class="d-label">Party</div>
+          <div class="d-sep"></div>
+          <div class="d-val">Rheinliebe am Deich <em>Niederkasseler Deich 301, Düsseldorf</em></div>
         </div>
       </div>
-      <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:18px">Anfahrtsdetails folgen</div>
     </div>
 
     <!-- 4. Dresscode -->
     <div class="page" id="page-dress">
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
       <div class="page-eyebrow">Dresscode</div>
-      <div class="thin-rule"></div>
       <div class="dress-title">Black Tie</div>
       <div class="dress-desc">
         Wir freuen uns über festliche Abendgarderobe.<br>
@@ -497,125 +454,125 @@
     </div>
 
     <!-- 5. RSVP -->
-    <div class="page" id="page-rsvp">
-      <div class="page-eyebrow">Anmeldung</div>
-      <div class="thin-rule"></div>
-      <div class="rsvp-wrap">
-        <div class="rsvp-until">
-          Bitte meldet euch bis zum
-          <strong>31. August 2026</strong>
-          bei uns zurück.
-        </div>
-        <div class="rsvp-box">
-          <div class="rsvp-box-label">Kontakt</div>
-          <div class="rsvp-box-name">Saskia &amp; Tim</div>
-          <div class="rsvp-box-detail">Details folgen in der Einladung</div>
-        </div>
-        <div class="rsvp-hint">Bitte teilt uns eventuelle<br>Unverträglichkeiten mit.</div>
+    <div class="page" id="page-rsvp" style="justify-content:flex-start;padding-top:28px">
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
       </div>
+      <div class="page-eyebrow">Anmeldung</div>
+      <div class="details-block" style="margin-top:4px">
+        <div class="d-row">
+          <div class="d-label">Frist</div>
+          <div class="d-sep"></div>
+          <div class="d-val">31. August 2026 <em>Bitte bis dahin zurückmelden</em></div>
+        </div>
+        <div class="d-row">
+          <div class="d-label">Kontakt</div>
+          <div class="d-sep"></div>
+          <div class="d-val">saskia.und.tim.heiraten<br><span style="font-size:11px">@t-online.de</span></div>
+        </div>
+        <div class="d-row">
+          <div class="d-label">Hinweis</div>
+          <div class="d-sep"></div>
+          <div class="d-val" style="font-style:italic;font-size:12px;color:rgba(255,255,255,0.55)">Bitte Unverträglichkeiten mitteilen</div>
+        </div>
+      </div>
+      <a class="rsvp-mail-btn" href="mailto:saskia.und.tim.heiraten@t-online.de?subject=Zusage%20Hochzeit%20Saskia%20%26%20Tim%20%E2%80%93%2028.11.2026&body=Liebe%20Saskia%2C%20lieber%20Tim%2C%0A%0Awir%20freuen%20uns%20sehr%20%C3%BCber%20eure%20Einladung%20und%20sagen%20herzlich%20ZU!%0A%0AFolgende%20Personen%20kommen%20mit%3A%0A%E2%80%93%20%5BName%201%5D%0A%E2%80%93%20%5BName%202%20%E2%80%93%20bitte%20erg%C3%A4nzen%20oder%20l%C3%B6schen%5D%0A%0AErn%C3%A4hrungsbesonderheiten%20%2F%20Unvertr%C3%A4glichkeiten%3A%0A%5BKeine%20%2F%20bitte%20eintragen%5D%0A%0AWir%20freuen%20uns%20auf%20euren%20gro%C3%9Fen%20Tag!%0A%0AHerzliche%20Gr%C3%BC%C3%9Fe%2C%0A%5BEuer%20Name%5D">
+        <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><polyline points="2,4 8,9 14,4"/></svg>
+        Jetzt zusagen
+      </a>
+      <div class="rsvp-mail-note">Öffnet eine vorformulierte E-Mail –<br>Namen eintragen &amp; absenden</div>
     </div>
 
     <!-- 6. FAQ -->
-    <div class="page" id="page-faq">
+    <div class="page" id="page-faq" style="justify-content:flex-start;padding-top:28px">
+      <div class="ornament">
+        <div class="orn-line"></div><div class="orn-diamond sm"></div>
+        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
+        <div class="orn-line r"></div>
+      </div>
       <div class="page-eyebrow">FAQ</div>
-      <div class="thin-rule"></div>
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-q">Übernachtungsmöglichkeiten?</div>
-          <div class="faq-a">Hotelempfehlungen folgen mit der Einladung.</div>
+          <div class="faq-q">Übernachtungsmöglichkeiten?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
+          <div class="faq-a">In der Nähe der Location befinden sich das <em>Novotel Düsseldorf City West</em> (Niederkasseler Lohweg 179) und das <em>Lindner Hotel Seestern</em> (Lütticher Str. 130).</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Kinder willkommen?</div>
-          <div class="faq-a">Details folgen – meldet euch gerne vorab bei uns.</div>
+          <div class="faq-q">Kinder willkommen?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
+          <div class="faq-a">Kinder sind herzlich eingeladen! Bitte gebt bei eurer Anmeldung an, wie viele Kinder mitkommen.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Parkplätze?</div>
+          <div class="faq-q">Parkplätze?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
           <div class="faq-a">An beiden Locations stehen Parkmöglichkeiten zur Verfügung.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Wünsche &amp; Geschenke?</div>
-          <div class="faq-a">Eure Anwesenheit ist das schönste Geschenk. Eine Wunschliste folgt.</div>
+          <div class="faq-q">Wünsche &amp; Geschenke?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
+          <div class="faq-a">Eure Anwesenheit ist uns das Wichtigste! Wer uns dennoch eine Freude machen möchte: Als leidenschaftliche Reisende freuen wir uns über einen Beitrag zur Reisekasse.</div>
         </div>
       </div>
     </div>
 
   </div><!-- /pages -->
 
-  <!-- ══ NAVIGATION mit minimalistischen SVG-Icons ══ -->
+  <!-- ══ NAVIGATION ══ -->
   <nav class="nav">
-
-    <!-- Start: Haus -->
     <button class="nav-btn active" data-page="home">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <path d="M2 7 L8 2 L14 7 L14 14 L10 14 L10 10 L6 10 L6 14 L2 14 Z"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M2 7L8 2l6 5v7h-4v-4H6v4H2z"/></svg>
       <span class="nav-label">Start</span>
     </button>
-
-    <!-- Programm: Uhr -->
     <button class="nav-btn" data-page="program">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <circle cx="8" cy="8" r="6"/>
-        <line x1="8" y1="8" x2="8" y2="4.5"/>
-        <line x1="8" y1="8" x2="11" y2="9.5"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><line x1="8" y1="8" x2="8" y2="4.5"/><line x1="8" y1="8" x2="11" y2="9.5"/></svg>
       <span class="nav-label">Programm</span>
     </button>
-
-    <!-- Location: Pin -->
     <button class="nav-btn" data-page="location">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <path d="M8 2 C5.2 2 3 4.2 3 7 C3 10.5 8 14 8 14 C8 14 13 10.5 13 7 C13 4.2 10.8 2 8 2 Z"/>
-        <circle cx="8" cy="7" r="1.8"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.8"/></svg>
       <span class="nav-label">Location</span>
     </button>
-
-    <!-- Dresscode: Kleiderbügel -->
     <button class="nav-btn" data-page="dress">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <path d="M8 3 C8 3 9.5 3 9.5 4.5 C9.5 5.5 8 6 8 6"/>
-        <path d="M8 6 L2 11 L14 11"/>
-        <line x1="2" y1="11" x2="2" y2="13"/>
-        <line x1="14" y1="11" x2="14" y2="13"/>
-        <line x1="2" y1="13" x2="14" y2="13"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 3c0 0 1.5 0 1.5 1.5S8 6 8 6"/><path d="M8 6L2 11h12L8 6z"/><line x1="2" y1="11" x2="2" y2="13"/><line x1="14" y1="11" x2="14" y2="13"/><line x1="2" y1="13" x2="14" y2="13"/></svg>
       <span class="nav-label">Dresscode</span>
     </button>
-
-    <!-- RSVP: Brief -->
     <button class="nav-btn" data-page="rsvp">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <rect x="2" y="4" width="12" height="9" rx="1"/>
-        <polyline points="2,4 8,9 14,4"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="9" rx="1"/><polyline points="2,4 8,9 14,4"/></svg>
       <span class="nav-label">RSVP</span>
     </button>
-
-    <!-- FAQ: Fragezeichen -->
     <button class="nav-btn" data-page="faq">
-      <svg class="nav-icon" viewBox="0 0 16 16">
-        <circle cx="8" cy="8" r="6"/>
-        <path d="M6.2 6.2 C6.2 5 7 4.3 8 4.3 C9 4.3 9.8 5 9.8 6 C9.8 7 8.8 7.5 8 8.2 L8 9.2"/>
-        <circle cx="8" cy="11" r="0.8" fill="currentColor" stroke="none" style="fill:rgba(255,255,255,0.38)"/>
-      </svg>
+      <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M6.2 6.2C6.2 5 7 4.3 8 4.3c1 0 1.8.7 1.8 1.7C9.8 7 8.8 7.5 8 8.2L8 9.2"/><circle cx="8" cy="11.2" r="0.8" fill="rgba(255,255,255,0.35)" stroke="none"/></svg>
       <span class="nav-label">FAQ</span>
     </button>
-
   </nav>
+
 </div>
 
 <script>
-  // Fallende Schneeflocken
+  // Fallende Schneeflocken als kleine SVG-Kreise
   const flakesEl = document.getElementById('flakes');
   for (let i = 0; i < 18; i++) {
+    const size = 2 + Math.random() * 3;
     const f = document.createElement('div');
-    f.className = 'flake';
-    // Nur kleine Punkte und winzige Flocken
-    f.textContent = Math.random() > 0.5 ? '·' : '•';
-    f.style.cssText = `left:${Math.random()*100}%;--size:${6+Math.random()*7}px;--fall-dur:${7+Math.random()*9}s;--fall-delay:${Math.random()*10}s;--drift:${-20+Math.random()*40}px`;
+    f.style.cssText = `position:absolute;top:-10px;left:${Math.random()*100}%;pointer-events:none;animation:fall ${9+Math.random()*10}s linear infinite ${Math.random()*14}s;--drift:${-20+Math.random()*40}px`;
+    f.innerHTML = `<svg width="${size*2}" height="${size*2}" viewBox="0 0 ${size*2} ${size*2}" xmlns="http://www.w3.org/2000/svg"><circle cx="${size}" cy="${size}" r="${size}" fill="rgba(255,255,255,${0.35+Math.random()*0.35})"/></svg>`;
     flakesEl.appendChild(f);
   }
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      const isOpen = q.classList.contains('open');
+      // Alle schließen
+      document.querySelectorAll('.faq-q').forEach(oq => {
+        oq.classList.remove('open');
+        oq.nextElementSibling.classList.remove('open');
+      });
+      // Geklickte öffnen falls war zu
+      if (!isOpen) {
+        q.classList.add('open');
+        answer.classList.add('open');
+      }
+    });
+  });
 
   // Navigation
   document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -624,18 +581,32 @@
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('page-' + btn.dataset.page).classList.add('active');
-    });
-  });
+    });  });
 
-  // FAQ: aktiven Nav-Icon-Punkt auf richtige Farbe setzen
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.nav-icon circle[fill="currentColor"]').forEach(el => {
-        el.style.fill = 'rgba(255,255,255,0.38)';
-      });
-      const activeCircle = btn.querySelector('.nav-icon circle[fill="currentColor"]');
-      if (activeCircle) activeCircle.style.fill = 'rgba(255,255,255,0.92)';
-    });
+  // Musik Toggle
+  const musicBtn = document.getElementById('music-btn');
+  const spotifyFrame = document.getElementById('spotify-frame');
+  const iconOff = document.getElementById('icon-off');
+  const iconOn  = document.getElementById('icon-on');
+  let playing = false;
+  const baseSrc = 'https://open.spotify.com/embed/track/04cxid64DzT5AmdimqhR7V?utm_source=generator&theme=0&autoplay=1';
+  musicBtn.addEventListener('click', () => {
+    playing = !playing;
+    if (playing) {
+      spotifyFrame.src = baseSrc;
+      spotifyFrame.style.display = 'block';
+      iconOff.style.display = 'none';
+      iconOn.style.display  = 'block';
+      musicBtn.classList.add('playing');
+      musicBtn.title = 'Musik pausieren';
+    } else {
+      spotifyFrame.src = '';
+      spotifyFrame.style.display = 'none';
+      iconOff.style.display = 'block';
+      iconOn.style.display  = 'none';
+      musicBtn.classList.remove('playing');
+      musicBtn.title = 'Musik abspielen';
+    }
   });
 </script>
 </body>
