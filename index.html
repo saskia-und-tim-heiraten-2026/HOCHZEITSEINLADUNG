@@ -241,18 +241,6 @@
     font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 11px; color: rgba(255,255,255,0.3); text-align: center;
   }
-  /* Musik-Button */
-  .music-btn {
-    position: absolute; top: 18px; right: 20px; z-index: 25;
-    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; border: none; background: none; padding: 0;
-    -webkit-tap-highlight-color: transparent; opacity: 0.35; transition: opacity 0.25s;
-  }
-  .music-btn:hover { opacity: 0.62; }
-  .music-btn svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  @keyframes musicPulse { 0%,100%{opacity:0.4} 50%{opacity:0.72} }
-  .music-btn.playing { animation: musicPulse 2.5s ease-in-out infinite; }
-  #spotify-frame { display: none; }
 
   .mail-btn {
     display: flex; align-items: center; justify-content: center; gap: 9px;
@@ -326,14 +314,6 @@
     <circle cx="13" cy="10.5" r="8.5" fill="none" stroke="white" stroke-width="1.5"/>
     <circle cx="27" cy="10.5" r="8.5" fill="none" stroke="white" stroke-width="1.5"/>
   </svg>
-
-  <!-- Musik-Button -->
-  <iframe id="spotify-frame" src="" width="0" height="0" frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-  <button class="music-btn" id="music-btn" title="Musik abspielen">
-    <svg id="icon-off" viewBox="0 0 16 16"><path d="M3 5.5H1v5h2l4 3v-11L3 5.5z"/><line x1="12" y1="5.5" x2="15" y2="10.5"/><line x1="15" y1="5.5" x2="12" y2="10.5"/></svg>
-    <svg id="icon-on" style="display:none" viewBox="0 0 16 16"><path d="M3 5.5H1v5h2l4 3v-11L3 5.5z"/><path d="M10.5 5 C12 6 12 10 10.5 11"/><path d="M12.5 3.5 C15 5.5 15 10.5 12.5 12.5"/></svg>
-  </button>
 
   <!-- ══ SEITEN ══ -->
   <div class="pages">
@@ -582,33 +562,6 @@
       btn.classList.add('active');
       document.getElementById('page-' + btn.dataset.page).classList.add('active');
     });  });
-
-  // Musik Toggle
-  const musicBtn = document.getElementById('music-btn');
-  const spotifyFrame = document.getElementById('spotify-frame');
-  const iconOff = document.getElementById('icon-off');
-  const iconOn  = document.getElementById('icon-on');
-  let playing = false;
-  const baseSrc = 'https://open.spotify.com/embed/track/04cxid64DzT5AmdimqhR7V?utm_source=generator&theme=0&autoplay=1';
-  musicBtn.addEventListener('click', () => {
-    playing = !playing;
-    if (playing) {
-      spotifyFrame.src = baseSrc;
-      spotifyFrame.style.display = 'block';
-      iconOff.style.display = 'none';
-      iconOn.style.display  = 'block';
-      musicBtn.classList.add('playing');
-      musicBtn.title = 'Musik pausieren';
-    } else {
-      spotifyFrame.src = '';
-      spotifyFrame.style.display = 'none';
-      iconOff.style.display = 'block';
-      iconOn.style.display  = 'none';
-      musicBtn.classList.remove('playing');
-      musicBtn.title = 'Musik abspielen';
-    }
-  });
 </script>
 </body>
 </html>
-
