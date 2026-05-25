@@ -209,6 +209,35 @@
   }
   .faq-a.open { max-height: 100px; padding-bottom: 9px; }
 
+  /* iCal Button */
+  .ical-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-top: 14px;
+    padding: 9px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.75);
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 2px; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ical-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.5); }
+  .ical-btn svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.65); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  /* Maps-Link */
+  .maps-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: 'Cinzel', serif; font-size: 6px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.38);
+    text-decoration: none; margin-top: 3px;
+    transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .maps-link:hover { color: rgba(255,255,255,0.65); }
+  .maps-link svg { width: 8px; height: 8px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
   /* Ringe */
   .rings-svg { position: absolute; bottom: 56px; left: 22px; opacity: 0.18; z-index: 11; }
 
@@ -340,70 +369,52 @@
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11.5px;color:rgba(255,255,255,0.35);margin-top:12px;letter-spacing:0.5px">Ihr seid herzlich eingeladen</div>
     </div>
 
-    <!-- 2. Programm -->
-    <div class="page" id="page-program" style="justify-content:flex-start;padding-top:28px">
+    <!-- 2. Programm & Location -->
+    <div class="page" id="page-program" style="justify-content:flex-start;padding-top:24px">
       <div class="ornament">
         <div class="orn-line"></div><div class="orn-diamond sm"></div>
         <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
         <div class="orn-line r"></div>
       </div>
       <div class="page-eyebrow">Unser Tag</div>
-      <div class="small-names">Saskia <span class="small-amp">&</span> Tim</div>
-      <div class="divider" style="width:120px;margin:8px auto 0">
-        <div class="div-line"></div><div class="div-icon"></div><div class="div-line"></div>
-      </div>
-      <div class="details-block">
+      <div class="details-block" style="margin-top:6px">
         <div class="d-row">
           <div class="d-label">16:45</div>
           <div class="d-sep"></div>
-          <div class="d-val">Treffen <em>Minoritenkloster Ratingen</em></div>
+          <div class="d-val">Treffen <em>Minoritenkloster · Minoritenstr. 1, Ratingen</em></div>
         </div>
         <div class="d-row">
           <div class="d-label">17:15</div>
           <div class="d-sep"></div>
-          <div class="d-val">Standesamtliche Trauung <em>Minoritenkloster Ratingen</em></div>
+          <div class="d-val">Standesamtliche Trauung <em>Minoritenkloster · Minoritenstr. 1, Ratingen</em></div>
         </div>
         <div class="d-row">
           <div class="d-label">Abends</div>
           <div class="d-sep"></div>
-          <div class="d-val">Sektempfang &amp; Dinner <em>Rheinliebe am Deich</em></div>
+          <div class="d-val">Sektempfang &amp; Dinner <em>Rheinliebe am Deich · Niederkasseler Deich 301, Düsseldorf</em></div>
         </div>
         <div class="d-row">
           <div class="d-label">Später</div>
           <div class="d-sep"></div>
-          <div class="d-val">After-Wedding Party <em>Rheinliebe am Deich</em></div>
+          <div class="d-val">After-Wedding Party <em>Rheinliebe am Deich · Niederkasseler Deich 301, Düsseldorf</em></div>
         </div>
       </div>
-      <div class="rsvp-block">
-        <div class="rsvp-text">Bitte meldet euch bis zum</div>
-        <div class="rsvp-date">31. August 2026</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,0.32);text-align:center;margin-top:12px;line-height:1.6">
+        Die Details können sich noch etwas verschieben –<br>wir halten euch hier auf dem Laufenden.
       </div>
-    </div>
-
-    <!-- 3. Location -->
-    <div class="page" id="page-location" style="justify-content:flex-start;padding-top:28px">
-      <div class="ornament">
-        <div class="orn-line"></div><div class="orn-diamond sm"></div>
-        <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
-        <div class="orn-line r"></div>
-      </div>
-      <div class="page-eyebrow">Locations</div>
-      <div class="details-block" style="margin-top:4px">
-        <div class="d-row">
-          <div class="d-label">Trauung</div>
-          <div class="d-sep"></div>
-          <div class="d-val">Minoritenkloster Ratingen <em>Minoritenstr. 1, 40878 Ratingen</em></div>
-        </div>
-        <div class="d-row">
-          <div class="d-label">Dinner</div>
-          <div class="d-sep"></div>
-          <div class="d-val">Rheinliebe am Deich <em>Niederkasseler Deich 301, Düsseldorf</em></div>
-        </div>
-        <div class="d-row">
-          <div class="d-label">Party</div>
-          <div class="d-sep"></div>
-          <div class="d-val">Rheinliebe am Deich <em>Niederkasseler Deich 301, Düsseldorf</em></div>
-        </div>
+      <a class="ical-btn" id="ical-btn" href="#" onclick="downloadIcal(event)">
+        <svg viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1"/><line x1="5" y1="1" x2="5" y2="5"/><line x1="11" y1="1" x2="11" y2="5"/><line x1="2" y1="7" x2="14" y2="7"/></svg>
+        Im Kalender speichern
+      </a>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <a class="ical-btn" style="margin-top:0;font-size:7px;padding:7px 12px" href="https://www.google.com/maps/dir/?api=1&destination=Minoritenstr.+1,+40878+Ratingen" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 7 5 7s5-3.5 5-7c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.8"/></svg>
+          Minoritenkloster
+        </a>
+        <a class="ical-btn" style="margin-top:0;font-size:7px;padding:7px 12px" href="https://www.google.com/maps/dir/?api=1&destination=Niederkasseler+Deich+301,+40547+Düsseldorf" target="_blank">
+          <svg viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 7 5 7s5-3.5 5-7c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.8"/></svg>
+          Rheinliebe
+        </a>
       </div>
     </div>
 
@@ -415,22 +426,15 @@
         <div class="orn-line r"></div>
       </div>
       <div class="page-eyebrow">Dresscode</div>
-      <div class="dress-title">Black Tie</div>
+      <div class="dress-title">Festlich</div>
       <div class="dress-desc">
-        Wir freuen uns über festliche Abendgarderobe.<br>
-        Dunkle Anzüge, Smokings und elegante<br>
-        Abendkleider passen wunderbar<br>
-        zur winterlichen Atmosphäre.
+        Uns ist es wichtig, dass ihr euch wohlfühlt –<br>
+        und dass man merkt, dass gefeiert wird.<br><br>
+        Ob elegantes Kleid, schicker Anzug<br>
+        oder ein festliches Outfit ganz nach<br>
+        eurem Geschmack: Hauptsache, ihr<br>
+        fühlt euch großartig darin.
       </div>
-      <div class="swatches">
-        <div class="swatch" style="background:#1e2430"></div>
-        <div class="swatch" style="background:#2c3a4a"></div>
-        <div class="swatch" style="background:#4a4a4a"></div>
-        <div class="swatch" style="background:#c8b87a"></div>
-        <div class="swatch" style="background:#ede9e0"></div>
-        <div class="swatch" style="background:#6b2030"></div>
-      </div>
-      <div class="dress-note">Weiß ist dem Brautpaar vorbehalten</div>
     </div>
 
     <!-- 5. RSVP -->
@@ -484,7 +488,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">Parkplätze?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
-          <div class="faq-a">An beiden Locations stehen Parkmöglichkeiten zur Verfügung.</div>
+          <div class="faq-a">Beim Standesamt im Ortszentrum von Ratingen ist Parken etwas eingeschränkt – bitte plant etwas mehr Zeit zum Parkplatz suchen ein. Das Parkhaus des Rathauses sowie die umliegenden Parkhäuser bieten gute Möglichkeiten. An der Rheinliebe stehen ausreichend Parkplätze zur Verfügung.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">Wünsche &amp; Geschenke?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
@@ -504,10 +508,6 @@
     <button class="nav-btn" data-page="program">
       <svg class="nav-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><line x1="8" y1="8" x2="8" y2="4.5"/><line x1="8" y1="8" x2="11" y2="9.5"/></svg>
       <span class="nav-label">Programm</span>
-    </button>
-    <button class="nav-btn" data-page="location">
-      <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.8"/></svg>
-      <span class="nav-label">Location</span>
     </button>
     <button class="nav-btn" data-page="dress">
       <svg class="nav-icon" viewBox="0 0 16 16"><path d="M8 3c0 0 1.5 0 1.5 1.5S8 6 8 6"/><path d="M8 6L2 11h12L8 6z"/><line x1="2" y1="11" x2="2" y2="13"/><line x1="14" y1="11" x2="14" y2="13"/><line x1="2" y1="13" x2="14" y2="13"/></svg>
@@ -562,6 +562,38 @@
       btn.classList.add('active');
       document.getElementById('page-' + btn.dataset.page).classList.add('active');
     });  });
+
+  // iCal Download
+  
+  function downloadIcal(e) {
+    e.preventDefault();
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Saskia & Tim//Hochzeit//DE',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:saskia-tim-hochzeit-28112026@event',
+      'DTSTAMP:20260101T000000Z',
+      'DTSTART;TZID=Europe/Berlin:20261128T164500',
+      'DTEND;TZID=Europe/Berlin:20261129T020000',
+      'SUMMARY:Hochzeit Saskia & Tim',
+      'DESCRIPTION:Treffen 16:45 Uhr im Minoritenkloster Ratingen\nStandesamtliche Trauung 17:15 Uhr\nSektempfang\, Dinner & After-Wedding Party\nRheinliebe am Deich\, Niederkasseler Deich 301\, Duesseldorf',
+      'LOCATION:Minoritenkloster\, Minoritenstr. 1\, 40878 Ratingen',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ];
+    const ical = lines.join('\r\n');
+    const blob = new Blob([ical], {type: 'text/calendar'});
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'Hochzeit-Saskia-Tim.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => window.URL.revokeObjectURL(link.href), 1000);
+  }
 </script>
 </body>
 </html>
