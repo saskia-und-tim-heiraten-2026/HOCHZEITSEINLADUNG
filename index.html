@@ -208,6 +208,11 @@
     transition: max-height 0.35s ease, padding-bottom 0.3s ease;
   }
   .faq-a.open { max-height: 100px; padding-bottom: 9px; }
+  .collage-caption {
+    font-family: 'Great Vibes', cursive; font-size: 26px;
+    color: rgba(255,255,255,0.65); text-align: center; margin-top: 10px;
+    flex-shrink: 0;
+  }
 
   /* iCal Button */
   .ical-btn {
@@ -237,6 +242,15 @@
   }
   .maps-link:hover { color: rgba(255,255,255,0.65); }
   .maps-link svg { width: 8px; height: 8px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Rundes Foto Startseite */
+  .couple-photo {
+    width: 88px; height: 88px; border-radius: 50%; overflow: hidden;
+    margin: 12px 0 6px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.07);
+  }
+  .couple-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%) brightness(0.9); }
 
   /* Ringe */
   .rings-svg { position: absolute; bottom: 56px; left: 22px; opacity: 0.18; z-index: 11; }
@@ -354,6 +368,15 @@
         <div class="orn-diamond"></div><div class="orn-diamond sm"></div>
         <div class="orn-line r"></div>
       </div>
+      <!-- Rundes Foto: src="euer-foto.jpg" eintragen -->
+      <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;margin:12px 0 6px;border:1px solid rgba(255,255,255,0.25);box-shadow:0 0 0 4px rgba(255,255,255,0.07);flex-shrink:0">
+        <svg width="88" height="88" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+          <rect width="88" height="88" fill="rgba(255,255,255,0.08)"/>
+          <circle cx="44" cy="34" r="14" fill="rgba(255,255,255,0.15)"/>
+          <ellipse cx="44" cy="62" rx="22" ry="14" fill="rgba(255,255,255,0.1)"/>
+          <text x="44" y="80" text-anchor="middle" font-family="Cinzel,serif" font-size="6" letter-spacing="1" fill="rgba(255,255,255,0.25)">EUER FOTO</text>
+        </svg>
+      </div>
       <div class="eyebrow">Wir heiraten</div>
       <div class="names">Saskia <span class="amp">&</span> Tim</div>
       <div class="divider" style="width:150px;margin:14px auto 10px">
@@ -368,8 +391,7 @@
       </div>
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11.5px;color:rgba(255,255,255,0.35);margin-top:12px;letter-spacing:0.5px">Ihr seid herzlich eingeladen</div>
     </div>
-
-    <!-- 2. Programm & Location -->
+    <!-- 3. Programm & Location -->
     <div class="page" id="page-program" style="justify-content:flex-start;padding-top:24px">
       <div class="ornament">
         <div class="orn-line"></div><div class="orn-diamond sm"></div>
