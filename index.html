@@ -207,7 +207,7 @@
     max-height: 0; overflow: hidden; padding-bottom: 0;
     transition: max-height 0.35s ease, padding-bottom 0.3s ease;
   }
-  .faq-a.open { max-height: 100px; padding-bottom: 9px; }
+  .faq-a.open { max-height: 220px; padding-bottom: 9px; }
   .collage-caption {
     font-family: 'Great Vibes', cursive; font-size: 26px;
     color: rgba(255,255,255,0.65); text-align: center; margin-top: 10px;
@@ -264,6 +264,38 @@
     border: 1px solid rgba(255,255,255,0.2);
     box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
   }
+
+  /* Musikwunsch */
+  .music-wish-wrap { width: 100%; margin-top: 6px; display: flex; flex-direction: column; gap: 10px; }
+  .music-input-group { display: flex; flex-direction: column; gap: 4px; }
+  .music-input-label {
+    font-family: 'Cinzel', serif; font-size: 6.5px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+  }
+  .music-input {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 2px; padding: 9px 12px;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    color: rgba(255,255,255,0.85); outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .music-input::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+  .music-input:focus { border-color: rgba(255,255,255,0.4); }
+  .music-send-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 20px; margin-top: 4px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.75);
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2.5px;
+    text-transform: uppercase; border-radius: 2px; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent; width: 100%;
+  }
+  .music-send-btn:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.5); }
+  .music-send-btn svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.65); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .music-note { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: 11px; color: rgba(255,255,255,0.28); text-align: center; margin-top: 2px; }
 
   /* Kontakt Mail-Button */
   .contact-mail-btn {
@@ -515,7 +547,6 @@
       </a>
       <div class="rsvp-mail-note">Öffnet eine vorformulierte E-Mail –<br>Namen eintragen &amp; absenden</div>
     </div>
-
     <!-- 6. FAQ -->
     <div class="page" id="page-faq" style="justify-content:flex-start;padding-top:28px">
       <div class="ornament">
@@ -541,7 +572,28 @@
           <div class="faq-q">Wünsche &amp; Geschenke?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
           <div class="faq-a">Eure Anwesenheit ist uns das Wichtigste! Wer uns dennoch eine Freude machen möchte: Als leidenschaftliche Reisende freuen wir uns über einen Beitrag zur Reisekasse.</div>
         </div>
+        <div class="faq-item">
+          <div class="faq-q">Wo kann ich Musikwünsche hinterlassen?<svg class="faq-arrow" viewBox="0 0 10 10"><polyline points="2,3 5,7 8,3"/></svg></div>
+          <div class="faq-a">
+            <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px;text-align:left">
+              <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5;margin-bottom:4px">Damit der Abend unvergesslich wird – welcher Song fehlt auf keiner eurer Playlists?</div>
+              <div class="music-input-group">
+                <label class="music-input-label">Song</label>
+                <input class="music-input" id="music-song" type="text" placeholder="z.B. Dancing Queen"/>
+              </div>
+              <div class="music-input-group">
+                <label class="music-input-label">Künstler</label>
+                <input class="music-input" id="music-artist" type="text" placeholder="z.B. ABBA"/>
+              </div>
+              <button class="music-send-btn" onclick="sendMusicWish()">
+                <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="10,4 14,8 10,12"/></svg>
+                Wunsch absenden
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="faq-gif-wrap" id="faq-gif">
         <img class="faq-gif" src="293F5FC7-D5CB-4B43-B515-74A7440C3E40.gif" alt=""/>
       </div>
@@ -584,6 +636,19 @@
     f.style.cssText = `position:absolute;top:-10px;left:${Math.random()*100}%;pointer-events:none;animation:fall ${9+Math.random()*10}s linear infinite ${Math.random()*14}s;--drift:${-20+Math.random()*40}px`;
     f.innerHTML = `<svg width="${size*2}" height="${size*2}" viewBox="0 0 ${size*2} ${size*2}" xmlns="http://www.w3.org/2000/svg"><circle cx="${size}" cy="${size}" r="${size}" fill="rgba(255,255,255,${0.35+Math.random()*0.35})"/></svg>`;
     flakesEl.appendChild(f);
+  }
+
+  // Musikwunsch per Mail
+  function sendMusicWish() {
+    const song = document.getElementById('music-song').value.trim();
+    const artist = document.getElementById('music-artist').value.trim();
+    if (!song && !artist) {
+      document.getElementById('music-song').focus();
+      return;
+    }
+    const subject = 'Musikwunsch%20f%C3%BCr%20eure%20Hochzeit';
+    const body = `Liebe%20Saskia%2C%20lieber%20Tim%2C%0A%0Aich%20h%C3%A4tte%20einen%20Musikwunsch%20f%C3%BCr%20eure%20Hochzeitsfeier%3A%0A%0ASong%3A%20${encodeURIComponent(song || '–')}%0AK%C3%BCnstler%3A%20${encodeURIComponent(artist || '–')}%0A%0ALiebe%20Gr%C3%BC%C3%9Fe`;
+    window.location.href = `mailto:saskia.und.tim.heiraten@t-online.de?subject=${subject}&body=${body}`;
   }
 
   // FAQ Accordion
